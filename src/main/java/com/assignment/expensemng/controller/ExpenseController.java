@@ -33,6 +33,8 @@ public class ExpenseController {
     public Optional<Expense> getExpenseByID(@PathVariable("id") Long expenseID) throws IOException {
         return expenseService.getExpensesByID(expenseID);
     }
+
+    //POST Expenses PDF
     @PostMapping("/expenses")
     public String uploadExpenses(@RequestParam("file") MultipartFile file) throws IOException {
         //return "done";

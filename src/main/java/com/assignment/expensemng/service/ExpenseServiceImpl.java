@@ -25,18 +25,13 @@ public class ExpenseServiceImpl implements ExpenseService{
     }
 
     public String parseExpensesPdf(MultipartFile file) throws IOException {
+
         // Parse the expenses PDF and extract the relevant data
-        //ExpenseSummary expenseSummary = new ExpenseSummary();
-
-        // Load the PDF document
-        //PDFBoxResource pdfResource = new PDFBoxResource(file.getInputStream());
-
         PDDocument document = Loader.loadPDF(file.getInputStream());
 
-        // Get the first page of the PDF document
-        //PDPage page = document.getPage(0);
+
         PDFTextStripper pdfStripper = new PDFTextStripper();
-        // Extract the text from the page
+        // Extract the text from the document
         String text = pdfStripper.getText(document);
 
         // Split the text into lines
@@ -86,8 +81,6 @@ public class ExpenseServiceImpl implements ExpenseService{
                 expense.setIsSettled(false);
 
                 expenseRepository.save(expense);
-                // Add the expense to the expense summary
-                //expenseSummary.addExpense(expense);
             }
 
         }
@@ -95,7 +88,7 @@ public class ExpenseServiceImpl implements ExpenseService{
         // Close the PDF document
         document.close();
 
-        // Return the expense summary
+        // Return the successfule msg
         return "expenses add successfully";
     }
 
